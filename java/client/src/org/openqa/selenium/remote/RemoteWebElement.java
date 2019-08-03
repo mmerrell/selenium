@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Beta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -98,6 +99,7 @@ public class RemoteWebElement implements WebElement, FindsByLinkText, FindsById,
         throw new IllegalArgumentException("Keys to send should be a not null CharSequence");
       }
     }
+
     File localFile = fileDetector.getLocalFile(keysToSend);
     if (localFile != null) {
       String remotePath = upload(localFile);
