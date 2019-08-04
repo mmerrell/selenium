@@ -189,4 +189,14 @@ public enum Keys implements CharSequence {
 
     return null;
   }
+
+  private static final Keys[] modifiers = new Keys[] { Keys.ALT, Keys.SHIFT, Keys.CONTROL, Keys.META };
+
+  public static Keys[] getModifiers() {
+    return modifiers;
+  }
+
+  public static boolean isModifier(int key) {
+    return Arrays.stream(modifiers).anyMatch(k -> k.getCodePoint() == key);
+  }
 }

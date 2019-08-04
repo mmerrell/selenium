@@ -28,6 +28,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.internal.MouseAction.Button;
 
+import java.security.Key;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -204,7 +205,13 @@ public class Actions {
     for (CharSequence key : keys) {
       key.codePoints().forEach(codePoint -> {
         tick(defaultKeyboard.createKeyDown(codePoint));
-        tick(defaultKeyboard.createKeyUp(codePoint));
+        //If NULL was sent, clear ALL modifiers
+        if (codePoint == Keys.NULL.getCodePoint()) {
+          Arrays.stream(Keys.getModifiers()).forEach(k -> defaultKeyboard.createKeyUp(k.getCodePoint()));
+        }
+        if (!Keys.isModifier(codePoint)) {
+          tick(defaultKeyboard.createKeyUp(codePoint));
+        }
       });
     }
     return this;

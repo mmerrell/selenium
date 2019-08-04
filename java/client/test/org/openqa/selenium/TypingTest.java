@@ -517,6 +517,8 @@ public class TypingTest extends JUnit4TestBase {
   @Test
   @NotYetImplemented(value = MARIONETTE, reason = "https://github.com/mozilla/geckodriver/issues/646")
   public void testChordControlCutAndPaste() {
+//TODO I don't think this assumption holds up anymore--the HOME key was functioning correctly for me in Safari
+// let me know what I'm missing
 //    assumeFalse("FIXME: macs don't have HOME keys, would PGUP work?",
 //                getEffectivePlatform().is(Platform.MAC));
 
