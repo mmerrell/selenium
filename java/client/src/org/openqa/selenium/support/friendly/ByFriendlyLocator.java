@@ -48,6 +48,29 @@ public class ByFriendlyLocator {
     return new FriendlyBy(By.tagName(tagName));
   }
 
+  public static FriendlyBy withClassName(String className) {
+    Objects.requireNonNull(className, "Class name to look for must be set");
+
+    return new FriendlyBy(By.className(className));
+  }
+
+  /**
+   * elementTarget isRightOf elementSource
+   * @param elementTarget The thing you want to measure against the Source
+   * @param elementSource The primary element from which to measure the Target
+   * @return
+   */
+  public static boolean isRightOf(WebElement elementTarget, WebElement elementSource) {
+    Objects.requireNonNull(elementTarget, "Element Target must be set");
+    Objects.requireNonNull(elementSource, "Element Source must be set");
+
+    FriendlyBy friendlyBy = new FriendlyBy(elementTarget);
+    friendlyBy.toRightOf(elementSource);
+
+    final List<WebElement> elements = elementSource.findElements(friendlyBy);
+    return !elements.isEmpty();
+  }
+
   public static class FriendlyBy extends By {
     private final Object root;
     private final List<Map<String, Object>> filters;
@@ -73,6 +96,11 @@ public class ByFriendlyLocator {
       this.filters = ImmutableList.copyOf(Objects.requireNonNull(filters));
     }
 
+    /**
+     * Generates a locator useful for getting elements above the given element
+     * @param element The element relative to which "above" will be measured
+     * @return a locator, usable by findElements, which will use "up" as a measure for other elements
+     */
     public FriendlyBy above(WebElement element) {
       Objects.requireNonNull(element, "Element to search for must be set.");
       return simpleDirection("above", element);
