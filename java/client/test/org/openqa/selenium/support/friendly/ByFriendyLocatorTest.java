@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.openqa.selenium.support.friendly.ByFriendyLocator.withTagName;
+//Workaround for static import build break
+//import static org.openqa.selenium.support.friendly.ByFriendyLocator.withTagName;
+import static org.openqa.selenium.support.friendly.ByFriendyLocator.*;
+
 
 public class ByFriendyLocatorTest extends JUnit4TestBase {
 
